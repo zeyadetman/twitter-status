@@ -9,18 +9,9 @@ function Card({ data: userData }) {
   useEffect(() => {
     const twts = tweets.filter(({ text }) => !text.includes("RT @"));
     const translatedTweets = [];
-    twts.forEach(({ text }) => {
-      translate(text, { to: "en" })
-        .then(res => {
-          translatedTweets.push(res.text);
-        })
-        .catch(err => {
-          console.error(err);
-        })
-        .finally(rr => {
-          console.log(rr, translatedTweets);
-        });
-    });
+    twts.forEach(({ text }) =>  translatedTweets.push(translate(text, { to: "en" })));
+    const res = await Promise.all(translatedTweets);
+    console.log(res);
   }, [tweets]);
 
   return (
