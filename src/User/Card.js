@@ -9,7 +9,7 @@ function Card({ data: userData }) {
   useEffect(() => {
     const twts = tweets.filter(({ text }) => !text.includes("RT @"));
     let res = [];
-    (function async (){
+    (async function (){
       const translatedTweets = [];
       twts.forEach(({ text }) =>  translatedTweets.push(translate(text, { to: "en" })));
       res = await Promise.all(translatedTweets)
